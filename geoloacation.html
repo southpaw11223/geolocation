@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get User Location</title>
+</head>
+<body>
+
+    <h1>Click the link to get your exact location</h1>
+
+    <!-- Link that triggers the geolocation function when clicked -->
+    <a href="#" onclick="getLocation()">Click to Get Location</a>
+
+    <!-- Paragraph to display the latitude and longitude -->
+    <p id="location"></p>
+
+    <script>
+        // Function to get the user's location
+        function getLocation() {
+            // Check if geolocation is available in the browser
+            if (navigator.geolocation) {
+                // Get the current position of the user
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        // Success: position returned
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        
+                        // Display the latitude and longitude in the paragraph with id="location"
+                        document.getElementById('location').innerHTML = 
+                            `Latitude: ${latitude} <br> Longitude: ${longitude}`;
+                    },
+                    function(error) {
+                        // Error: failed to get location
+                        document.getElementById('location').innerHTML = 
+                            `Error: ${error.message}`;
+                    }
+                );
+            } else {
+                // Geolocation is not supported by the browser
+                document.getElementById('location').innerHTML = 
+                    "Geolocation is not supported by this browser.";
+            }
+        }
+    </script>
+
+</body>
+</html>
